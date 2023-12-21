@@ -1,0 +1,129 @@
+<div class="head bg-body-secondary">
+  <div
+    class="head-content d-flex rounded-2 align-items-center justify-content-between"
+  >
+    <div class="head-content-left">
+      <div class="search-container position-relative">
+        <div *ngIf="!canShowSearchAsOverlay" class="normal-search fs-6">
+          <input
+            type="search"
+            class="search bg-white rounded-5 px-5 border-0"
+            name=""
+            id=""
+            placeholder="Search..."
+          />
+          <i
+            class="far fa-search search-icon text-success fs-6 position-absolute"
+          ></i>
+        </div>
+        <div *ngIf="canShowSearchAsOverlay">
+          <button
+            [cdkMenuTriggerFor]="searchOverlay"
+            class="search-menu-btn rounded-5 border-0 cursor-pointer fs-5 me-2 ripple"
+          >
+            <i class="far fa-search search-icon fs-6 text-success"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="head-content-right d-flex align-items-center">
+      <div class="head-menu d-flex flex-row align-items-center">
+        <div class="head-menu-item">
+          <button
+            class="head-menu-item-btn rounded-5 border-0 cursor-pointer fs-5 me-2 ripple"
+          >
+            <img
+              (click)="changeLanguage()"
+              [src]="lang == 'en' ? 'assets/flags/eg.jpg' : 'assets/flags/us.jpg'"
+              class="flag "
+            />
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button
+            class="head-menu-item-btn rounded-5 cursor-pointer border-0 fs-5 me-2 ripple"
+          >
+            <i class="far fa-expand menu-icon"></i>
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button
+            class="head-menu-item-btn rounded-5 cursor-pointer border-0 fs-5 me-2 ripple"
+            [cdkMenuTriggerFor]="notificationOverlay"
+          >
+            <i class="far fa-bell menu-icon"></i>
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button
+            class="head-menu-item-btn rounded-5 cursor-pointer border-0 fs-5 me-2 ripple"
+          >
+            <i class="far fa-comment-alt menu-icon"></i>
+          </button>
+        </div>
+      </div>
+      <div class="head-user-avatar-container">
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+          <img
+            src="../../../../assets/user3.jpg"
+            alt="user"
+            class="user-avatar"
+          />
+          <div class="circle-indicator pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #searchOverlay>
+  <div class="overlay overlay-search overlay-fall p-0" cdkMenu>
+    <input type="search" name="" id="" class="search" placeholder="search..." />
+    <button class="search-btn">
+      <i class="far fa-search search-icon"></i>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #notificationOverlay>
+  <div class="overlay overlay-notification overlay-fall" cdkMenu>
+    <ul class="p-0">
+      <li
+        class="notification-head-container d-flex align-items-center justify-content-between"
+      >
+        <div class="notification-head fs-6">notifications</div>
+        <span class="view-all-link">
+          <a>View All</a>
+        </span>
+      </li>
+      <li
+        class="notification-message-container"
+        *ngFor="let notification of notifications"
+        cdkMenuItem
+      >
+        <i [class]="notification.icon"></i>
+        <div>
+          <div class="notification-subject">
+            {{ notification.subject }}
+          </div>
+          <p class="notification-desc">
+            {{ notification.description }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #userOverlay>
+  <div class="overlay overlay-user overlay-fall rounded-3 p-1 m-1">
+    <ul>
+      <li *ngFor="let item of userItems">
+        <a [routerLink]="item.routerLink">
+          <i class="icon" [ngClass]="item.icon"></i>
+          <span>{{ item.label }}</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</ng-template>

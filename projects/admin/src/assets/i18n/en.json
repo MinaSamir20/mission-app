@@ -1,0 +1,52 @@
+{
+  "tasks": {
+    "add": "Add Task",
+    "complete": "Complete",
+    "inComplete": "InComplete",
+    "unknown": "Unknown",
+    "search": "Search",
+    "searchTitle": "Mission",
+    "byUser": "By User",
+    "status": "Status",
+    "date": "Enter a date range",
+    "startDate":"Start Date",
+    "endDate":"End Date"
+  },
+  "category": {
+    "add": "Add Category"
+  },
+  "mainMenu": {},
+  "school": {
+    "add": "Add School"
+  },
+  "user": {
+    "add": "Add User"
+  },
+  "general": {
+    "loading": "Loading"
+  },
+  "table": {
+    "number": "No.",
+    "username": "CoordinatorName",
+    "school": "SchoolName",
+    "category": "Category",
+    "deadline": "DeadLine Date",
+    "mission": "Mission",
+    "status": "Status",
+    "actions": "Actions",
+    "updatebtn": "Update",
+    "deletebtn": "Delete"
+  },
+  "header": {},
+  "sidebar": {
+    "title": "EMERALD System",
+    "dashboard": "Dashboard",
+    "categories": "Categories",
+    "coordinators": "Coordinators",
+    "schools": "Schools",
+    "missions": "Missions",
+    "settings": "Settings"
+  },
+  "toastr": {},
+  "buttons": {}
+}

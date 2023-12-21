@@ -1,0 +1,165 @@
+<div class="w-100 mt-1">
+  <h1 class="mb-3">Dashboard</h1>
+  <div class="row align-items-center justify-content-center">
+    <div class="col-sm-3 mb-3 align-items-center" *ngFor="let data of details">
+      <div class="card border-0 text-center rounded-5" id="content">
+        <div class="col-md-4 card-img-top ps-3">
+          <i
+            [class]="data.icon"
+            class="fs-1 rounded-circle bg-body bg-opacity-25 d-inline-block text-light pt-4"
+          ></i>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title text-light">{{ data.number }}</h3>
+          <h5 class="card-text text-light">{{ data.title }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-0 rounded-5 bg-body-secondary pt-0">
+        <div class="listBox pt-0 badge w-100">
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            class="bg-body-secondary w-100 mt-3"
+          >
+            <ng-container matColumnDef="position">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.number" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element; let index = index">
+                {{ index + 1 }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="coordinator">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.username" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.coordinator }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="school">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.school" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="mession">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.mession" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.mession }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="deadLine">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.deadline" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.deadLine }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                class="text-black body-secondary fw-bold"
+              >
+                {{ "table.status" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="
+                let row;
+                columns: displayedColumns
+                  | paginate
+                    : {
+                        id: 'tasks',
+                        itemsPerPage: 10,
+                        currentPage: page,
+                        totalItems: total
+                      }
+              "
+            ></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card border-0 rounded-5 text-center bg-body-secondary">
+        <div class="card-head">Dashboard</div>
+        <div class="card-body">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam
+          obcaecati nam amet fuga unde iure veritatis maiores vel distinctio
+          nihil voluptate error pariatur recusandae maxime, deleniti omnis
+          exercitationem esse.
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="card border-0 rounded-5 text-center bg-body-secondary">
+        <div class="card-head text-start fs-4">Calendar</div>
+        <div class="card-body pt-0">
+          <app-calendar></app-calendar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-w-100">
+      <div class="card border-0 rounded-5 text-center bg-body-secondary">
+        <div class="card-head">Dashboard</div>
+        <div class="card-body">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam
+          obcaecati nam amet fuga unde iure veritatis maiores vel distinctio
+          nihil voluptate error pariatur recusandae maxime, deleniti omnis
+          exercitationem esse.
+        </div>
+      </div>
+    </div>
+    <div class="col-w-100">
+      <div class="card border-0 rounded-5 text-center bg-body-secondary">
+        <div class="card-head">Dashboard</div>
+        <div class="card-body">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam
+          obcaecati nam amet fuga unde iure veritatis maiores vel distinctio
+          nihil voluptate error pariatur recusandae maxime, deleniti omnis
+          exercitationem esse.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.login {
+  position: absolute;
+  inset: 0;
+
+  .overlay {
+    // background-color: rgba(255, 255, 255, 0.164);
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .box {
+    z-index: 5;
+    background-color: #f3f3f3;
+    width: 30%;
+    padding: 50px 20px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2),
+      -4px -4px 6px 0 rgb(255, 255, 255);
+    h2 {
+      color: #066306;
+    }
+    button {
+      padding: 2px 100px;
+    }
+  }
+}
+::ng-deep .mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above{
+  color: green;
+}
+
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing{
+  border-color: green;
+  border-width: 0.2rem;
+}

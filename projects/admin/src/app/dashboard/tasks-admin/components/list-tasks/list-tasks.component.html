@@ -1,0 +1,207 @@
+<div class="w-100 mt-1">
+  <div class="mb-4 d-flex justify-content-end">
+    <button
+      class="bg-success fs-5 text-white px-4 fw-bold me-2"
+      mat-raised-button
+      (click)="addTask()"
+    >
+      {{ "tasks.add" | translate }}
+    </button>
+  </div>
+  <form class="option bg-body-secondary my-2 p-2 rounded-3">
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "tasks.search" | translate }}</mat-label>
+          <input
+            matInput
+            (keyup)="search($event.target)"
+            placeholder="{{ 'tasks.searchTitle' | translate }}"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "tasks.byUser" | translate }}</mat-label>
+          <mat-select (selectionChange)="selectUser($event)">
+            <mat-option *ngFor="let user of users" [value]="user?.id">
+              {{ user?.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "tasks.date" | translate }}</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input
+              matStartDate
+              placeholder="{{ 'tasks.startDate' | translate }}"
+              (dateChange)="selectDate($event, 'fromDate')"
+            />
+            <input
+              matEndDate
+              placeholder="{{ 'tasks.endDate' | translate }}"
+              (dateChange)="selectDate($event, 'toDate')"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="listBox p-1 pt-0 badge w-100">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="bg-body-secondary w-100 mt-3"
+    >
+      <ng-container matColumnDef="position">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.number" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          {{ index + 1 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="coordinator">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.username" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element"><ul style="padding: 0;">
+          <li *ngFor="let coordinator of element.coordinator" style="list-style: none;">
+            {{ coordinator.user.nameEn }}
+          </li>
+        </ul></td>
+      </ng-container>
+
+      <ng-container matColumnDef="school">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.school" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element"><ul style="padding: 0;">
+          <li *ngFor="let school of element.schools" style="list-style: none;">
+            {{ school.schoolName }}
+          </li>
+        </ul></td>
+      </ng-container>
+
+      <ng-container matColumnDef="mession">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "Title" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.category" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element"><ul style="padding: 0;">
+          <li *ngFor="let category of element.category" style="list-style: none;">
+            {{ category.name }}
+          </li>
+        </ul></td>
+      </ng-container>
+
+      <ng-container matColumnDef="deadLine">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.deadline" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.deadLine | date:'yyyy-MM-dd' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold"
+        >
+          {{ "table.status" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-white bg-success fw-bold w-20"
+        >
+          {{ "table.actions" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            class="btn fw-bold text-white bg-warning me-2"
+            mat-raised-button
+            (click)="updateTask(element)"
+          >
+            {{ "table.updatebtn" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            class="fw-bold"
+            color="warn"
+            (click)="deleteTask(element._id)"
+          >
+            {{ "table.deletebtn" | translate }}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: displayedColumns
+            | paginate
+              : {
+                  id: 'tasks',
+                  itemsPerPage: 10,
+                  currentPage: page,
+                  totalItems: total
+                }
+        "
+      ></tr>
+    </table>
+    <div class="pagination mt-3 fs-6 d-flex justify-content-center">
+      <pagination-controls
+        (pageChange)="changePage($event)"
+        id="tasks"
+        previousLabel=""
+        nextLabel=""
+      ></pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+{
+  "tasks": {
+    "add": "إضافة مهمة",
+    "complete": "مكتمل",
+    "inComplete": "غير مكتمل",
+    "unknown": "غير معروفة",
+    "search": "بحث",
+    "searchTitle": "بالمهمة",
+    "byUser": "بالمنسق",
+    "status": "الحالة",
+    "date": "ادخل مدة زمنية",
+    "startDate":"بداية المدة",
+    "endDate":"نهاية المدة"
+  },
+  "category":{
+    "add" : "إضافة تصنيف"
+  },
+  "mainMenu":{},
+  "school": {
+    "add" : "إضافة مدرسة"
+  },
+  "user": {
+    "add" : "إضافة منسق"
+  },
+  "general": {
+    "loading": "انتظار"
+  },
+  "table":{
+    "number": "م",
+    "username": "المنسق",
+    "school": "المدرسة",
+    "category": "التصنيف",
+    "deadline": "الوقت المطلوب",
+    "mession": "المهمة",
+    "status": "الحالة",
+    "actions": "إجراءات",
+    "updatebtn":"تعديل",
+    "deletebtn":"حذف"
+  },
+  "header":{},
+  "sidebar":{
+    "title":"EMERALD System",
+    "dashboard":"لوحة القيادة",
+    "categories":"الفئات",
+    "coordinators":"المنسقين",
+    "schools":"المدارس",
+    "missions":"المهمات",
+    "settings":"الإعدادات"
+  },
+  "toastr":{},
+  "buttons":{}
+}

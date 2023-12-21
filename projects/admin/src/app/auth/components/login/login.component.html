@@ -1,0 +1,48 @@
+<div class="login d-flex justify-content-center align-items-center m-auto">
+  <div class="row">
+    <div class="col-md-6 p-0">
+      <div class="overlay"></div>
+      <img src="assets/login-background.png" alt="" />
+    </div>
+    <div class="col-md-6">
+      <div class="h-100 d-flex align-items-center justify-content-center w-100">
+        <div class="box w-50">
+          <h2>Login</h2>
+          <form [formGroup]="loginForm">
+            <mat-form-field appearance="outline" class="w-100 mt-3">
+              <mat-label>Email</mat-label>
+              <input
+              class="mt-2"
+                matInput
+                formControlName="email"
+                placeholder="email"
+              />
+              <mat-icon matSuffix color="primary">email</mat-icon>
+              <mat-error class="ps-2">required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 mt-3" color="primary">
+              <mat-label >Password</mat-label>
+              <input
+                class="mt-2"
+                matInput
+                formControlName="password"
+                type="password"
+                placeholder="password"
+              />
+              <mat-icon matSuffix color="primary">lock</mat-icon>
+              <mat-error>required</mat-error>
+            </mat-form-field>
+          </form>
+          <div class="d-flex justify-content-center mt-4">
+            <button mat-raised-button color="success" class="m-1" (click)="login()">
+              Login
+            </button>
+            <button mat-raised-button color="warn" class="m-1" (click)="register()">
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

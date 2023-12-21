@@ -1,0 +1,18 @@
+::ng-deep .mat-calendar-table-header-divider::after,
+::ng-deep .mat-calendar-body-label {
+  background: rgba(210, 231, 222, 0.5);
+  border-radius: 5%;
+}
+::ng-deep .mat-calendar-body-cell-content{
+ color: rgb(0, 139, 81);
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical)
+{
+  border-color: rgb(209 231 221);
+}
+
+::ng-deep .mat-calendar-body-cell, .mat-calendar-body-cell-active {
+  border-radius: 50%;
+  background-color: rgb(0, 139, 81);
+}

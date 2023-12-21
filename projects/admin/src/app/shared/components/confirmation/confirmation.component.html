@@ -1,0 +1,24 @@
+<div class="p-4">
+  <header>
+    <h3 class="py-4">Are You sure That You Want To Discard Your Changes ?</h3>
+  </header>
+  <footer>
+    <div class="d-flex justify-content-center align-items-center">
+      <button
+        mat-flat-button
+        class="btn btn-success py-3 px-5 mx-2"
+        (click)="confirm()"
+      >
+        Yes
+      </button>
+      <button
+        mat-flat-button
+        class="btn btn-danger py-3 px-5"
+        color="warn"
+        (click)="close()"
+      >
+        No
+      </button>
+    </div>
+  </footer>
+</div>

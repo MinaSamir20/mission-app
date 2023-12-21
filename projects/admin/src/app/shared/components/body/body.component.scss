@@ -1,0 +1,22 @@
+.body {
+  width: calc(100% - 5rem);
+  // height: 100vh;
+  margin-left: 6rem;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
+  z-index: 0;
+  top: 3rem;
+  transition: all 0.5s ease;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2),
+    -4px -4px 6px 0 rgb(255, 255, 255);
+}
+
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
