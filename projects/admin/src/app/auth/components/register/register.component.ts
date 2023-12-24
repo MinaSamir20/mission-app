@@ -67,15 +67,6 @@ export class RegisterComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  //................OnlyNumbersAllowed................//
-  OnlyNumbersAllowed($event: any): boolean {
-    const charCode = $event.which ? $event.which : $event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
-  }
-  //.................................................//
   createUserForm() {
     this.registerUserForm = this.fb.group({
       nameEn: ['', [Validators.required]],
@@ -145,8 +136,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const formData = new FormData();
-    formData.append('file', this.registerUserForm.get('file')?.value);
     if (this.registerUserForm.valid) {
       console.log(this.registerUserForm.value);
       // this.spinner.show();
