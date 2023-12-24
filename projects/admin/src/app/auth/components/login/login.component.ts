@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit {
         next: (user) => {
           const isAuthenticated = true;
           if (isAuthenticated && user.roles == 'COORDINATOR') {
-            this.service.setAuthenticated(true);
+            this.service.setAuthToken(user.token);
             this.toastr.success('Success', 'Login Success');
-            // console.log(user);
+            console.log(user);
             this.router.navigate(['/main']);
           }
           this.spinner.hide();

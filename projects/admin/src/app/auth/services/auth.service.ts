@@ -4,17 +4,17 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'projects/admin/src/environments/environment';
+import { UserRegister } from '../models/register.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-  
+  private authToken: string | null = null;
+
   constructor(private http: HttpClient) {}
 
-  public register(user: User): Observable<any>{
+  public register(user: any): Observable<any>{
     return this.http.post<any>(environment.baseApi + 'Auth/register',user);
   }
 
@@ -22,11 +22,11 @@ export class AuthService {
     return this.http.post<any>(environment.baseApi + 'Auth/login', user);
   }
 
-  setAuthenticated(value: boolean): void {
-    this.isAuthenticatedSubject.next(value);
+  setAuthToken(token: string): void {
+    this.authToken = token;
   }
 
-  getIsAuthenticated(): boolean {
-    return this.isAuthenticatedSubject.value;
+  getAuthToken(): string | null {
+    return this.authToken;
   }
 }

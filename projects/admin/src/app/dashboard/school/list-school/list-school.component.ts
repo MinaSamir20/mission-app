@@ -25,13 +25,7 @@ export class ListSchoolComponent implements OnInit {
   dataSource: any = [];
   addresSchool: any;
   SchoolsFilter!: FormGroup;
-  users: any = [
-    { name: 'Moahmed', id: 1 },
-    { name: 'Ali', id: 2 },
-    { name: 'Ahmed', id: 3 },
-    { name: 'Zain', id: 4 },
-  ];
-
+  users: any = [];
   status: any = [{ name: 'Complete' }, { name: 'In-Progress' }];
   address: any;
   @ViewChild('myTdElement') myTdElement!: ElementRef;
@@ -122,10 +116,11 @@ export class ListSchoolComponent implements OnInit {
   mappingSchools(data: any[]) {
     let newSchools = data.map((item) => {
       return {
+        ...data,
         id: item.id,
         name: item.schoolName,
         image: item.imageUrl,
-        coordinator: item.coordinator.user.nameEn,
+        // coordinator: item.user,
         address: item.address.cityName,
         status: item.status
       };

@@ -1,35 +1,18 @@
-.login {
-  position: absolute;
-  inset: 0;
-
-  .overlay {
-    // background-color: rgba(255, 255, 255, 0.164);
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  .box {
-    z-index: 5;
-    background-color: #f3f3f3;
-    width: 30%;
-    padding: 50px 20px;
-    border-radius: 15px;
-    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2),
-      -4px -4px 6px 0 rgb(255, 255, 255);
-    h2 {
-      color: #066306;
-    }
-    button {
-      padding: 2px 100px;
-    }
-  }
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
 }
-
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
 //   :host ::ng-deep {
 //     .mat-form-field-appearance-outline  {
 //       border-color: #FFF!important;

@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -13,11 +13,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
   dragging = false;
-  imageSrc: string | ArrayBuffer | null = null;
+  imageSrc: any = null;
   registerUserForm!: FormGroup;
   registerCoorinatorForm!: FormGroup;
   hide = true;
   gender: any[] = [];
+  userId: string | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -33,38 +34,36 @@ export class RegisterComponent implements OnInit {
     this.createUserForm();
   }
 
-  onDragOver(e: DragEvent){
+  onFileDropped(e: any) {
+    this.setImage(e.dataTransfer?.files);
+    this.dragging = false;
+  }
+
+  onDragOver(e: DragEvent) {
     e.preventDefault();
+    this.dragging = true;
   }
 
-  onFileDropped(e: DragEvent) {
-    e.preventDefault();
-    const files = e.dataTransfer?.files;
-    if (files && files.length > 0) {
-      this.setImage(files[0]);
-    }
-  }
-
-  onFileSelected(e: Event) {
-    const input = e.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.setImage(input.files[0]);
-    }
-  }
-
-  onDragLeave(e: DragEvent){
+  onDragLeave(e: DragEvent) {
     e.preventDefault();
     this.dragging = false;
   }
 
-  setImage(file: File) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageSrc = reader.result;
-      this.registerUserForm.patchValue({ imageUrl: file.name });
-      console.log('Form value updated');
-    };
-    reader.readAsDataURL(file);
+  onFileSelected(e: any) {
+    this.setImage(e.target.files);
+  }
+
+  setImage(files: FileList) {
+    if (files && files.length > 0) {
+      const selectedImage = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedImage);
+      reader.onload = () => {
+        this.imageSrc = reader.result;
+        this.registerUserForm.get('imageUrl')!.setValue(selectedImage);
+      };
+    }
+    console.log('Form value updated');
   }
 
   createUserForm() {
@@ -81,7 +80,7 @@ export class RegisterComponent implements OnInit {
         ],
       ],
       gender: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]],
+      imageUrl: [null, [Validators.required]],
       username: [
         '',
         [
@@ -137,21 +136,41 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerUserForm.valid) {
-      console.log(this.registerUserForm.value);
-      // this.spinner.show();
-      // this.service.register(this.registerForm.value).subscribe({
-      //   next: (user) => {
-      //     const isAuthenticated = true;
-      //     this.toastr.success('Success', 'Login Success');
-      //     this.router.navigate(['/']);
-      //     this.spinner.hide();
-
-      //   },
-      //   error: (error) => {
-      //     this.toastr.error("something wrong");
-      //     this.spinner.hide();
-      //   },
-      // });
+      const formData = new FormData();
+      formData.append('nameAr', this.registerUserForm.get('nameAr')?.value);
+      formData.append('nameEn', this.registerUserForm.get('nameEn')?.value);
+      formData.append('imageUrl', this.registerUserForm.get('imageUrl')?.value);
+      formData.append('password', this.registerUserForm.get('password')?.value);
+      formData.append('email', this.registerUserForm.get('email')?.value);
+      formData.append('username', this.registerUserForm.get('username')?.value);
+      formData.append('gender', this.registerUserForm.get('gender')?.value);
+      formData.append(
+        'phoneNumber',
+        this.registerUserForm.get('phoneNumber')?.value
+      );
+      this.spinner.show();
+      this.service.register(formData).subscribe({
+        next: (user) => {
+          this.toastr.success('Success', 'Login Success');
+          this.spinner.hide();
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          this.toastr.error('something wrong');
+          console.log(error.message);
+          this.spinner.hide();
+        },
+      });
     }
   }
+
+  //................OnlyNumbersAllowed................//
+  OnlyNumbersAllowed($event: any): boolean {
+    const charCode = $event.which ? $event.which : $event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+  //.................................................//
 }

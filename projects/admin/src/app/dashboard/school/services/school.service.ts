@@ -23,8 +23,9 @@ export class SchoolService {
     return this.http.get<School[]>(environment.baseApi + 'Schools/GetAllSchools');
   }
 
-  createShool(model: any) {
-    return this.http.post(environment.baseApi + 'Schools/CreateSchool/', model);
+  createShool(model: any, authToken: string) {
+    const headers = { Authorization: `Bearer ${authToken}` };
+    return this.http.post(environment.baseApi + 'Schools/CreateSchool', model, { headers });
   }
 
   updateSchool(model: any, id: any) {
