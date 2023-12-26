@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
           if (isAuthenticated && user.roles == 'COORDINATOR') {
             this.service.setAuthToken(user.token);
             this.toastr.success('Success', 'Login Success');
-            console.log(user);
             this.router.navigate(['/main']);
           }
           this.spinner.hide();

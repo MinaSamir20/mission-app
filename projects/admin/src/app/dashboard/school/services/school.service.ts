@@ -20,23 +20,35 @@ export class SchoolService {
   //   params = params.append('keyword', filter.keyword)
   // }
   getAllSchools(): Observable<School[]> {
-    return this.http.get<School[]>(environment.baseApi + 'Schools/GetAllSchools');
+    return this.http.get<School[]>(
+      environment.baseApi + 'Schools/GetAllSchools'
+    );
   }
 
-  createShool(model: any, authToken: string) {
+  createShool(schoolData: any, authToken: string) {
     const headers = { Authorization: `Bearer ${authToken}` };
-    return this.http.post(environment.baseApi + 'Schools/CreateSchool', model, { headers });
+    console.log(schoolData);
+    return this.http.post(
+      environment.baseApi + 'Schools/CreateSchool',
+      schoolData,
+      { headers, responseType: 'text' }
+    );
   }
 
   updateSchool(model: any, id: any) {
-    return this.http.put(environment.baseApi + 'Schools/UpdateSchool/' + id, model);
+    return this.http.put(
+      environment.baseApi + 'Schools/UpdateSchool/' + id,
+      model
+    );
   }
 
   deleteSchool(id: any) {
     return this.http.delete(environment.baseApi + 'Schools/RemoveSchool/' + id);
   }
 
-  getAddressById(id:any) {
-    return this.http.get(environment.baseApi + 'Addresses/GetAddressById?' + id);
+  getAddressById(id: any) {
+    return this.http.get(
+      environment.baseApi + 'Addresses/GetAddressById?' + id
+    );
   }
 }

@@ -16,7 +16,7 @@ export class CategoryService {
   }
 
   createCategory(model: any) {
-    return this.http.post(environment.baseApi + 'Categories/CreateCategory/', model);
+    return this.http.post(environment.baseApi + 'Categories/CreateCategory', model, { responseType: 'text' });
   }
 
   updateCategory(model: any, id: any) {

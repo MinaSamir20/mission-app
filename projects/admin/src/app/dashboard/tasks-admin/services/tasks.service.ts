@@ -23,15 +23,18 @@ export class TasksService {
     return this.http.get<Mession[]>(environment.baseApi + 'Missions/GetAllMissions');
   }
 
+  createDetails(model: any) {
+    return this.http.post(environment.baseApi + 'ContentDetails/CreateContent', model);
+  }
   createTask(model: any) {
-    return this.http.post(environment.baseApi + 'Missions/CreateMission/', model);
+    return this.http.post(environment.baseApi + 'Missions/CreateMission', model);
   }
 
   updateTask(model: any, id: any) {
-    return this.http.put(environment.baseApi + 'Missions/UpdateMission/' + id, model);
+    return this.http.put(environment.baseApi + 'Missions/UpdateMission' + id, model);
   }
 
   deleteTask(id: any) {
-    return this.http.delete(environment.baseApi + 'Missions/RemoveMission/', id);
+    return this.http.delete(environment.baseApi + 'Missions/RemoveMission', id);
   }
 }

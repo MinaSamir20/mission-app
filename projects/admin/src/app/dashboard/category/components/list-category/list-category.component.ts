@@ -96,7 +96,6 @@ export class ListCategoryComponent implements OnInit {
         description: item.description,
       };
     });
-    console.log(newCategories);
     return newCategories;
   }
 

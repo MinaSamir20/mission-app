@@ -8,12 +8,14 @@ import { MaterialModule } from '../../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from '../../shared/shared.module';
+import { ContentDetailComponent } from './components/content-detail/content-detail.component';
 
 
 @NgModule({
   declarations: [
     AddTaskComponent,
     ListTasksComponent,
+    ContentDetailComponent,
   ],
   imports: [
     MaterialModule,

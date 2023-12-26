@@ -88,14 +88,14 @@
   <footer class="tw-p-6">
     <div class="d-flex justify-content-center align-items-center">
       <button
-        *ngIf="!data"
+        
         mat-flat-button
         class="btn btn-success py-1 px-5 mx-2"
         (click)="createSchool()"
       >
         Create
       </button>
-      <button
+      <!-- <button
         *ngIf="data"
         mat-flat-button
         class="btn btn-success py-1 px-5 mx-2"
@@ -103,7 +103,7 @@
         [disabled]="newSchoolForm.invalid"
       >
         Update
-      </button>
+      </button> -->
 
       <button
         mat-flat-button

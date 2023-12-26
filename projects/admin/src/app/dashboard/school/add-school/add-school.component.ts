@@ -21,6 +21,16 @@ import { AuthService } from '../../../auth/services/auth.service';
   styleUrls: ['./add-school.component.scss'],
 })
 export class AddSchoolComponent implements OnInit {
+  user: any = [];
+  government: any = [];
+  filename = '';
+  newSchoolForm!: FormGroup;
+  newAddressForm!: FormGroup;
+  formValues: any;
+  authToken: any;
+  imageSrc: any = null;
+  dragging = false;
+  fileInput: any;
 
   onFileDropped(e: any) {
     this.setImage(e.dataTransfer?.files);
@@ -84,16 +94,6 @@ export class AddSchoolComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {}
-  user: any = [];
-  government: any = [];
-  filename = '';
-  newSchoolForm!: FormGroup;
-  newAddressForm!: FormGroup;
-  formValues: any;
-  authToken: any;
-  imageSrc: any = null;
-  dragging = false;
-  fileInput: any;
 
   ngOnInit(): void {
     this.createForm();
@@ -106,8 +106,13 @@ export class AddSchoolComponent implements OnInit {
     this.spinner.show();
     this.coordinator.getAllCoordinators().subscribe({
       next: (users) => {
-        this.user = users;
-        this.user = this.mappingUsers(users);
+        this.user = users.map((item) => {
+          return {
+            id: item.id,
+            coordinatorEn: item.user.nameEn,
+            coordinatorAr: item.user.nameAr,
+          };
+        });
         this.spinner.hide();
       },
       error: (response) => {
@@ -116,16 +121,7 @@ export class AddSchoolComponent implements OnInit {
       },
     });
   }
-  mappingUsers(data: any[]) {
-    let newUsers = data.map((item) => {
-      return {
-        id: item.user.id,
-        coordinatorEn: item.user.nameEn,
-        coordinatorAr: item.user.nameAr,
-      };
-    });
-    return newUsers;
-  }
+
   getAllGoverments() {
     const auth = this.auth.getAuthToken();
     this.addressService.getAllGovernment(auth!).subscribe({
@@ -134,11 +130,13 @@ export class AddSchoolComponent implements OnInit {
       },
     });
   }
+
   createForm() {
     this.newSchoolForm = this.fb.group({
       schoolName: [this.data?.schoolName || '', [Validators.required]],
-      imageUrl: [this.data?.imageUrl || '', [Validators.required]],
-      coordinatorId: [this.data?.coordinatorId || '', [Validators.required]],
+      imageUrl: [this.data?.imageUrl || null, [Validators.required]],
+      coordinatorId: [this.data?.coordinatorId || null, [Validators.required]],
+      addressId: [this.data?.addressId || null, [Validators.required]],
     });
     this.newAddressForm = this.fb.group({
       cityName: [this.data?.address.cityName || '', [Validators.required]],
@@ -151,40 +149,46 @@ export class AddSchoolComponent implements OnInit {
     this.formValues = this.newSchoolForm.value;
   }
 
-  // selectImage(event: any) {
-  //   this.filename = event.target.value;
-  //   this.newSchoolForm.get('image')?.setValue(event.target.files[0]);
-  // }
-
   createSchool() {
-    let formData = new FormData();
-    formData.append('schoolName', this.newSchoolForm.get('schoolName')?.value);
-    formData.append('imageUrl', this.newSchoolForm.get('imageUrl')?.value);
-    formData.append(
-      'coordinatorId',
-      this.newSchoolForm.get('coordinatorId')?.value
-    );
+    const auth = this.auth.getAuthToken();
     this.spinner.show();
-    console.log(this.newSchoolForm.value);
     this.addressService
-      .createAddress(this.newAddressForm.value, this.authToken!)
+      .createAddress(this.newAddressForm.value, auth!)
       .subscribe({
         next: (res: any) => {
-          console.log(res);
-          formData.append('addressId', res);
-          this.service.createShool(formData, this.authToken!).subscribe({
-            next: (res) => {
-              console.log(formData);
-              this.toastr.success('School Ceated successfully', 'success');
-              this.spinner.hide();
-              this.dialog.close(true);
-            },
-            error: (error) => {
-              this.spinner.hide();
-              this.toastr.error(error.error.message);
-              console.log(error);
-            },
-          });
+          if (res && res !== undefined) {
+            this.newSchoolForm.patchValue({ addressId: res });
+            // console.log(this.newSchoolForm.value);
+            let formData = new FormData();
+            formData.append(
+              'schoolName',
+              this.newSchoolForm.get('schoolName')?.value
+            );
+            formData.append(
+              'imageUrl',
+              this.newSchoolForm.get('imageUrl')?.value
+            );
+            formData.append(
+              'coordinatorId',
+              this.newSchoolForm.get('coordinatorId')?.value
+            );
+            formData.append(
+              'addressId',
+              this.newSchoolForm.get('addressId')?.value
+            );
+            this.service.createShool(formData, auth!).subscribe({
+              next: (res) => {
+                this.toastr.success('School Ceated successfully', 'success');
+                this.spinner.hide();
+                this.dialog.close(true);
+              },
+              error: (error) => {
+                this.spinner.hide();
+                this.toastr.error(error.error.message);
+                console.log(error.error.message);
+              },
+            });
+          }
         },
         error: (error) => {
           this.spinner.hide();

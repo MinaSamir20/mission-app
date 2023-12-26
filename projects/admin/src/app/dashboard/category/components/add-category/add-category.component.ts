@@ -42,13 +42,6 @@ export class AddCategoryComponent implements OnInit{
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {}
-  users: any = [
-    { name: 'Moahmed', id: 1 },
-    { name: 'Ali', id: 2 },
-    { name: 'Ahmed', id: 3 },
-    { name: 'Zain', id: 4 },
-  ];
-  filename = '';
   newCategoryForm!: FormGroup;
   formValues: any;
 
@@ -57,44 +50,28 @@ export class AddCategoryComponent implements OnInit{
   }
   createForm() {
     this.newCategoryForm = this.fb.group({
-      title: [
-        this.data?.title || '',
+      name: [
+        this.data?.name || '',
         [Validators.required, Validators.minLength(5)],
       ],
-      userId: [this.data?.user._id || '', [Validators.required]],
-      image: [this.data?.image || '', [Validators.required]],
       description: [this.data?.description || '', [Validators.required]],
-      deadline: [
-        this.data
-          ? new Date(this.data?.deadline.split('-').reverse().join('-'))
-              .toISOString
-          : '',
-        [Validators.required],
-      ],
     });
-
     this.formValues = this.newCategoryForm.value;
-  }
-
-  selectImage(event: any) {
-    this.filename = event.target.value;
-    this.newCategoryForm.get('image')?.setValue(event.target.files[0]);
   }
 
   createCategory() {
     this.spinner.show();
-    let model = this.prepareFormData();
-    this.service.createCategory(model).subscribe(
-      (res) => {
+    this.service.createCategory(this.newCategoryForm.value).subscribe({
+      next: (res) => {
         this.toastr.success('Category Ceated successfully', 'success');
         this.spinner.hide();
         this.dialog.close(true);
       },
-      (error) => {
+      error: (error) => {
         this.spinner.hide();
         this.toastr.error(error.error.message);
-      }
-    );
+      },
+    });
   }
 
   updateCategory() {
