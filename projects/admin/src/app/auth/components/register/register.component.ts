@@ -4,8 +4,6 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -22,7 +20,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private service: AuthService,
     private toastr: ToastrService,
     private router: Router,

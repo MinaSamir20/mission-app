@@ -5,7 +5,7 @@
     "inComplete": "InComplete",
     "unknown": "Unknown",
     "search": "Search",
-    "searchTitle": "Mission",
+    "searchTitle": "Task",
     "byUser": "By User",
     "status": "Status",
     "date": "Enter a date range",
@@ -27,15 +27,36 @@
   },
   "table": {
     "number": "No.",
+    "title": "Title",
     "username": "CoordinatorName",
     "school": "SchoolName",
     "category": "Category",
     "deadline": "DeadLine Date",
-    "mission": "Mission",
+    "mission": "Task",
     "status": "Status",
     "actions": "Actions",
     "updatebtn": "Update",
     "deletebtn": "Delete"
+  },
+  "form":{
+    "main":"Add New Task",
+    "title":"Task Name",
+    "attachmentUrl":{
+      "drag":"Select a file or drag here",
+      "select":"Select a file"
+    },
+    "deadline":"DeadLine for Task",
+    "suggestion":"Suggestions for improving the level of maintenance",
+    "satisfaction":"Suggestions for improving the level of maintenance",
+    "category":"Category Of Task",
+    "content":"Content Of Task",
+    "coordinator":"Coordinator Of Task",
+    "question":"Questions",
+    "answer":"Answer",
+    "school":"School Name",
+    "create":"Create",
+    "update":"Update",
+    "close":"Close"
   },
   "header": {},
   "sidebar": {
@@ -44,7 +65,7 @@
     "categories": "Categories",
     "coordinators": "Coordinators",
     "schools": "Schools",
-    "missions": "Missions",
+    "missions": "Tasks",
     "settings": "Settings"
   },
   "toastr": {},

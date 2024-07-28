@@ -27,6 +27,7 @@
   },
   "table":{
     "number": "م",
+    "title": "العنوان",
     "username": "المنسق",
     "school": "المدرسة",
     "category": "التصنيف",
@@ -36,6 +37,28 @@
     "actions": "إجراءات",
     "updatebtn":"تعديل",
     "deletebtn":"حذف"
+  },
+  "form":{
+    "main":"إضافة مهمة جديدة",
+    "title":"اسم المهمة",
+    "attachmentUrl":{
+      "drag":"اختر ملف أو ارفقه هنا",
+      "select":"إرفاق ملف"
+    },
+    "deadline":"المدة المحددة للمهمة",
+    "suggestion":"مقترحات لتحسين مستوى الخدمة",
+    "satisfaction":"مدر رضاءك عن  مستوى الخدمة",
+    "category":"التصنيف",
+    "content":{
+      "":""
+    },
+    "coordinator":"المنسق",
+    "question":"سؤال",
+    "answer":"إجابة",
+    "school":"المدرسة",
+    "create":"إنشاء",
+    "update":"تعديل",
+    "close":"إغلاق"
   },
   "header":{},
   "sidebar":{

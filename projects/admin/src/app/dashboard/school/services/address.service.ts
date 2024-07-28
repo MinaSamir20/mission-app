@@ -20,11 +20,11 @@ export class AddressService {
   getAllGovernment(authToken: string) {
     const headers = { Authorization: `Bearer ${authToken}` };
     return this.http.get(
-      environment.baseApi + 'Governments/GetAllGovernments',
+      environment.baseApi + 'Governments/AllGovernments',
       { headers }
     );
   }
   getAllSchools(): Observable<any> {
-    return this.http.get<any>(environment.baseApi + 'Schools/GetAllSchools');
+    return this.http.get<any>(environment.baseApi + 'Schools/AllSchools');
   }
 }

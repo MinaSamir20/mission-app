@@ -12,19 +12,13 @@ const routes: Routes = [
         path: 'main',
         loadChildren: () =>
           import('./main-page/main-page.module').then((m) => m.MainPageModule),
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'mainpage',
-        loadChildren: () =>
-          import('./main-page/main-page.module').then((m) => m.MainPageModule),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'categories',
         loadChildren: () =>
           import('./category/category.module').then((m) => m.CategoryModule),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'tasks',
@@ -32,7 +26,7 @@ const routes: Routes = [
           import('./tasks-admin/tasks-admin.module').then(
             (m) => m.TasksAdminModule
           ),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'users',
@@ -40,13 +34,13 @@ const routes: Routes = [
           import('./manage-users/manage-users.module').then(
             (m) => m.ManageUsersModule
           ),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'schools',
         loadChildren: () =>
           import('./school/school.module').then((m) => m.SchoolModule),
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       // Wildcard route - should be the last route
       { path: '**', redirectTo: '/' },

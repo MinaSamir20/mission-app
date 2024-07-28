@@ -149,7 +149,7 @@ export class MainPageComponent implements OnInit {
 
   getAllTasks() {
     this.spinner.show();
-    this.service.getAllTasks().subscribe(
+    this.service.getAllTasks(null).subscribe(
       (res: any) => {
         this.dataSource = this.mappingTasks(res.tasks);
         this.total = res.totalitems;

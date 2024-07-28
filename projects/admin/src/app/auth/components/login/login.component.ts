@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       this.service.login(this.loginForm.value).subscribe({
         next: (user) => {
           const isAuthenticated = true;
-          if (isAuthenticated && user.roles == 'COORDINATOR') {
+          if (isAuthenticated) {
             this.service.setAuthToken(user.token);
             this.toastr.success('Success', 'Login Success');
             this.router.navigate(['/main']);
@@ -63,6 +63,6 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['auth/register']);
   }
 }

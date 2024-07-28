@@ -21,7 +21,7 @@ export class UsersService {
     // if (filter.keyword) {
     //   params = params.append('keyword', filter.keyword)
     // }
-    return this.http.get<User[]>(environment.baseApi + 'Coordinators/GetAllCoordinators/', /*{params}*/);
+    return this.http.get<User[]>(environment.baseApi + 'Coordinators/AllCoordinators/', /*{params}*/);
   }
 
   createCoordinator(model: any) {

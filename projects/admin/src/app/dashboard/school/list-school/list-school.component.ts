@@ -99,7 +99,7 @@ export class ListSchoolComponent implements OnInit {
 
   getAllSchools() {
     this.spinner.show();
-    this.service.getAllSchools().subscribe({
+    this.service.getAllSchools(null).subscribe({
       next: (schools) => {
         this.dataSource = schools;
         this.dataSource = this.mappingSchools(schools);

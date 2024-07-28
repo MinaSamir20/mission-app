@@ -53,7 +53,7 @@ export class SidebarComponent implements OnInit {
   screenWidth = 0;
   navData: any = [
     {
-      routeLink: 'mainpage',
+      routeLink: 'main',
       icon: 'fal fa-home',
       label: this.translate.instant('sidebar.dashboard'),
     },

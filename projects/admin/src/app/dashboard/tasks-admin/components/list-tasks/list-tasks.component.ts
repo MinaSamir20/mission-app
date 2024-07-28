@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'projects/admin/src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-list-tasks',
@@ -33,11 +34,20 @@ export class ListTasksComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private service: TasksService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private translate: TranslateService
   ) {}
+
+  canActivate(): boolean {
+    if (!this.authService.getAuthToken()) {
+      return false;
+    }
+    this.authService.getAuthToken()
+    return true;
+  }
 
   page: any = 1;
   filteration: any = {
@@ -100,7 +110,7 @@ export class ListTasksComponent implements OnInit {
 
   getAllTasks() {
     this.spinner.show();
-    this.service.getAllTasks().subscribe({
+    this.service.getAllTasks(null).subscribe({
       next: (mession) => {
         this.dataSource = mession;
         this.dataSource = this.mappingTasks(mession);

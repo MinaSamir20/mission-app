@@ -19,17 +19,18 @@ export class SchoolService {
   // if (filter.keyword) {
   //   params = params.append('keyword', filter.keyword)
   // }
-  getAllSchools(): Observable<School[]> {
-    return this.http.get<School[]>(
-      environment.baseApi + 'Schools/GetAllSchools'
-    );
+  getAllSchools(coordinatorId:any | null): Observable<any> {
+    if(coordinatorId){
+      return this.http.get<any>(`${environment.baseApi}Schools/AllSchools?CoordinatorId=${coordinatorId}`);
+    }
+    return this.http.get<any>(`${environment.baseApi}Schools/AllSchools`);
   }
 
   createShool(schoolData: any, authToken: string) {
     const headers = { Authorization: `Bearer ${authToken}` };
     console.log(schoolData);
     return this.http.post(
-      environment.baseApi + 'Schools/CreateSchool',
+      `${environment.baseApi}Schools/CreateSchool`,
       schoolData,
       { headers, responseType: 'text' }
     );
@@ -48,7 +49,7 @@ export class SchoolService {
 
   getAddressById(id: any) {
     return this.http.get(
-      environment.baseApi + 'Addresses/GetAddressById?' + id
+      environment.baseApi + 'Addresses/AddressById?' + id
     );
   }
 }

@@ -19,12 +19,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list'
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [],
   imports: [],
   exports: [
     MatAutocompleteModule,
+    MatSliderModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatBottomSheetModule,

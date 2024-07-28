@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/admin/src/environments/environment';
 import { Observable } from 'rxjs';
-import { Mession } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +9,7 @@ import { Mession } from '../models/task.model';
 export class TasksService {
   constructor(private http: HttpClient) {}
 
-  getAllTasks(/*filter:any*/): Observable<Mession[]> {
+  getAllTasks(/*filter:any,*/ coordinatorId: any | null): Observable<any> {
     // let params = new HttpParams()
     // Object.entries(filter).forEach(([key, value] : any) =>{
     //   if (value) {
@@ -20,18 +19,38 @@ export class TasksService {
     // if (filter.keyword) {
     //   params = params.append('keyword', filter.keyword)
     // }
-    return this.http.get<Mession[]>(environment.baseApi + 'Missions/GetAllMissions');
+    if (coordinatorId) {
+      return this.http.get<any>(
+        `${environment.baseApi}Missions/AllMissions?CoordinatorId=${coordinatorId}`
+      );
+    }
+    return this.http.get<any>(`${environment.baseApi}Missions/AllMissions`);
+  }
+
+  loadContent(id: any) {
+    return this.http.get<any>(
+      `${environment.baseApi}ContentDetails/AllContentById`
+    );
   }
 
   createDetails(model: any) {
-    return this.http.post(environment.baseApi + 'ContentDetails/CreateContent', model);
+    return this.http.post(
+      `${environment.baseApi}ContentDetails/CreateContent`,
+      model
+    );
   }
   createTask(model: any) {
-    return this.http.post(environment.baseApi + 'Missions/CreateMission', model);
+    return this.http.post(
+      environment.baseApi + 'Missions/CreateMission',
+      model
+    );
   }
 
   updateTask(model: any, id: any) {
-    return this.http.put(environment.baseApi + 'Missions/UpdateMission' + id, model);
+    return this.http.put(
+      environment.baseApi + 'Missions/UpdateMission' + id,
+      model
+    );
   }
 
   deleteTask(id: any) {
